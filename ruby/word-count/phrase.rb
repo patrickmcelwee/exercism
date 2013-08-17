@@ -6,12 +6,14 @@ class Phrase
   end
 
   def word_count
-    count = {}
-    phrase.downcase.split(/\W/).each do |word|
-      next if word.empty?
-      count[word] ||= 0
+    downcased_words.each_with_object(Hash.new(0)) do |word, count|
       count[word] += 1
     end
-    count
+  end
+
+  private
+
+  def downcased_words
+    phrase.downcase.split(/\W+/)
   end
 end
